@@ -1,6 +1,6 @@
 DrawingTracker::Application.routes.draw do
 
-  root to: "drawings#index"
+  root to: "projects#index"
 
   resources :projects
 

@@ -1,2 +1,18 @@
-<h1>Projects#show</h1>
-<p>Find me in app/views/projects/show.html.erb</p>
+<h1><%= "#{@project.name}  (#{@project.number})" %></h1>
+
+<table>
+  <tr>
+    <th>Drawing No.</th>
+    <th>Revision</th>
+    <th>Status</th>
+  </tr>
+  <% @project.erection_drawings.each do |drawing| %>
+    <tr>
+      <td><%= drawing.number %></td>
+      <td><%= drawing.revision %></td>
+      <td><%= drawing.status || "-" %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h3><%= @project.percent_in_shop %> % in shop</h3>

@@ -1,8 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :project do
-    name "Croton"
-    number "208-05-09"
+  factory :erection_drawing do
+    number "MyString"
+    revision 1
   end
 end

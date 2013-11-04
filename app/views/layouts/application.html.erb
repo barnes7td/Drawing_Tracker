@@ -7,8 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="container">
+    <nav>
+      <ul>
+        <li><%= link_to "Projects", root_path %></li>
+      </ul>
+    </nav>
+    <div class="6 columns alpha"></div>
+    <div class="8 columns omega">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

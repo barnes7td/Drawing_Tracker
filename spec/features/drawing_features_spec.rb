@@ -4,7 +4,7 @@ feature "User views all drawings" do
   scenario "all cases" do
     visit drawings_path
 
-    expect(page).to have_content("Erection Drawings")
+    expect(page).to have_content("Drawings")
     expect(page).to have_content("Piece Drawings")
   end
 end

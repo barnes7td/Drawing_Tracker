@@ -1,18 +1,28 @@
-<h1><%= "#{@project.name}  (#{@project.number})" %></h1>
+<h2><%= "#{@project.name}  (#{@project.number})" %></h2>
+<h4><%= @project.percent_in_shop %> % Finished</h4>
+<br>
 
 <table>
   <tr>
-    <th>Drawing No.</th>
-    <th>Revision</th>
-    <th>Status</th>
+    <th class="table-column">Drawing No.</th>
+    <th class="table-column">Status</th>
+    <th class="table-column">Last Updated</th>
   </tr>
-  <% @project.erection_drawings.each do |drawing| %>
+  <% @project.drawings_by_number.each do |drawing| %>
     <tr>
-      <td><%= drawing.number %></td>
-      <td><%= drawing.revision %></td>
-      <td><%= drawing.status || "-" %></td>
+      <td class="table-column <%= drawing.status %>"><%= drawing.number %></td>
+      <td class="table-column <%= drawing.status %>"><%= drawing.status || "-" %></td>
+      <td class="table-column <%= drawing.status %>"><%= drawing.updated_at.strftime("%b %d, %Y") %></td>
+      <td class="table-column-delete"><%= link_to "Delete", drawing_path(drawing.id), method: "delete", id: "drawing-delete-#{drawing.id}" %></td>
     </tr>
   <% end %>
 </table>
-
-<h3><%= @project.percent_in_shop %> % in shop</h3>
+<br>
+<%= form_tag drawings_path do %>
+    <%= hidden_field_tag :project_id, @project.id %>
+    <%= label_tag :drawings, "Drawings" %>
+    <%= text_field_tag :drawings %>
+    <%= label_tag :status, "Status" %>
+    <%= text_field_tag :status %>
+    <%= submit_tag "Update" %>
+<% end %>

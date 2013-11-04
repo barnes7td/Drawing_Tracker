@@ -11,13 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031184302) do
+ActiveRecord::Schema.define(:version => 20131103192709) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "drawings", :force => true do |t|
+    t.string   "number"
+    t.string   "status"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "drawings", ["project_id"], :name => "index_drawings_on_project_id"
 
   create_table "erection_drawings", :force => true do |t|
     t.string   "number"

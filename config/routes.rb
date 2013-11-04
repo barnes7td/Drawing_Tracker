@@ -6,4 +6,6 @@ DrawingTracker::Application.routes.draw do
 
   resources :drawings
 
+  get "/projects/:id/by_status", to: "projects#by_status"
+
 end

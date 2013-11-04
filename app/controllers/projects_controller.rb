@@ -17,6 +17,13 @@ class ProjectsController < ApplicationController
   end
 
   def ready
-    @projects = Project.order(drawings: s)
+    # @projects = Project.order(drawings: s)
+  end
+
+  def by_status
+    puts "**********************"
+    p params
+    @project = Project.find(params[:id])
+    @drawings = Drawing.by_status(@project)
   end
 end

@@ -3,4 +3,8 @@ class Drawing < ActiveRecord::Base
 
   belongs_to :projects
 
+  def self.by_status(project_id)
+    where(project_id: project_id).order(:status)
+  end
+
 end

@@ -1,9 +1,11 @@
-
-<h2>Projects</h2>
+<h2>Tuttle Engineering</h2>
 
 <%= link_to "Add project", new_project_path %>
 <br>
 <br>
 <% @projects.each do |project| %>
-  <h4><%= link_to project.name, project %></h4>
+  <h4>
+    <%= link_to "#{project.name} (#{project.number})", project, class: "project-list-name" %>
+    <span class="project-small"><%= project.percent_in_shop %> % Finished</span>
+  </h4>
 <% end %>

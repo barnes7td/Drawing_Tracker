@@ -1,6 +1,6 @@
 <h2>
   <%= "#{@project.name}  (#{@project.number})" %>
-  <span><%= link_to "Project by status", "/projects/#{@project.id}/by_status" %></span>
+  <span><%= link_to "Project by number", project_path(@project.id)%></span>
 </h2>
 <h4><%= @project.percent_in_shop %> % Finished</h4>
 <br>
@@ -11,7 +11,7 @@
     <th class="table-column">Status</th>
     <th class="table-column">Last Updated</th>
   </tr>
-  <% @project.drawings_by_number.each do |drawing| %>
+  <% @drawings.each do |drawing| %>
     <tr>
       <td class="table-column <%= drawing.status %>"><%= drawing.number %></td>
       <td class="table-column <%= drawing.status %>"><%= drawing.status || "-" %></td>

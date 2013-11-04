@@ -2,14 +2,18 @@
   <%= "#{@project.name}  (#{@project.number})" %>
   <span><%= link_to "Project by status", "/projects/#{@project.id}/by_status" %></span>
 </h2>
-<h4><%= @project.percent_in_shop %> % Finished</h4>
+<p>
+  <span id="show-stats">
+    <%= "#{@project.percent_in_shop}% Complete of #{@project.number_of_drawings} Drawings  - #{@project.no_of_drawings_ready} Drawings Ready - #{@project.no_of_drawings_question}  Drawings in Question" %>
+  </span>
+</p>
 <br>
 
 <table>
   <tr>
-    <th class="table-column">Drawing No.</th>
-    <th class="table-column">Status</th>
-    <th class="table-column">Last Updated</th>
+    <th>Drawing No.</th>
+    <th>Status</th>
+    <th>Last Updated</th>
   </tr>
   <% @project.drawings_by_number.each do |drawing| %>
     <tr>

@@ -21,8 +21,6 @@ class ProjectsController < ApplicationController
   end
 
   def by_status
-    puts "**********************"
-    p params
     @project = Project.find(params[:id])
     @drawings = Drawing.by_status(@project)
   end

@@ -13,12 +13,14 @@
   <tr>
     <th>Drawing No.</th>
     <th>Status</th>
+    <th>Note</th>
     <th>Last Updated</th>
   </tr>
   <% @project.drawings_by_number.each do |drawing| %>
     <tr>
       <td class="table-column <%= drawing.status %>"><%= drawing.number %></td>
       <td class="table-column <%= drawing.status %>"><%= drawing.status || "-" %></td>
+      <td class="table-column notes <%= drawing.status %>"><%= drawing.notes || "-" %></td>
       <td class="table-column <%= drawing.status %>"><%= drawing.updated_at.strftime("%b %d, %Y") %></td>
       <td class="table-column-delete"><%= link_to "Delete", drawing_path(drawing.id), method: "delete", id: "drawing-delete-#{drawing.id}" %></td>
     </tr>
@@ -31,5 +33,7 @@
     <%= text_field_tag :drawings %>
     <%= label_tag :status, "Status" %>
     <%= text_field_tag :status %>
+    <%= label_tag :notes, "Note" %>
+    <%= text_field_tag :notes %>
     <%= submit_tag "Update" %>
 <% end %>

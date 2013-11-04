@@ -12,10 +12,11 @@ class DrawingsController < ApplicationController
     drawing_list.each do |drawing|
       drawing_query = Drawing.where(project_id: project.id, number: drawing).all
       if drawing_query.empty?
-        project.drawings.create(number: drawing, status: params[:status])
+        project.drawings.create(number: drawing, status: params[:status], notes: params[:notes])
       else
         drawing = drawing_query[0]
         drawing.status = params[:status]
+        drawing.notes = params[:notes] unless params[:notes].empty?
         drawing.save
       end
     end

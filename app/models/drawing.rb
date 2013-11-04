@@ -1,5 +1,5 @@
 class Drawing < ActiveRecord::Base
-  attr_accessible :number, :status
+  attr_accessible :number, :status, :notes
 
   belongs_to :projects
 

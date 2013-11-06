@@ -4,7 +4,6 @@ class ProjectsController < ApplicationController
       status = params[:status]
       # @projects = Project.joins(:drawings).select("projects.*, drawings.project_id, count('a')").merge(Drawing.where(status: status)).group(:name).order("count('a') DESC")
       @projects = Project.joins(:drawings).select("projects.*, drawings.project_id, count('a')").merge( Drawing.where(status: status)).group(:id, '"drawings"."project_id"').order("count('a') DESC")
-
     else
       @projects = Project.order(:number).all
     end

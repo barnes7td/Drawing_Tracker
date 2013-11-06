@@ -33,6 +33,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'squeel'
 
 
 if RUBY_PLATFORM =~ /darwin/

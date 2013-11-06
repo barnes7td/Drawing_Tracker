@@ -8,4 +8,6 @@ DrawingTracker::Application.routes.draw do
 
   get "/projects/:id/by_status", to: "projects#by_status"
 
+  get "/ready", to: "projects#ready"
+
 end

@@ -1,6 +1,11 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all
+    if params[:status]
+      status = params[:status]
+      @projects = Project.joins(:drawings).select("projects.*, drawings.project_id, count('a')").merge(Drawing.where(status: status)).group(:name).order("count('a') DESC")
+    else
+      @projects = Project.order(:number).all
+    end
   end
 
   def show
@@ -17,7 +22,7 @@ class ProjectsController < ApplicationController
   end
 
   def ready
-    # @projects = Project.order(drawings: s)
+    @projects = Project.joins(:drawings).select("projects.*, drawings.project_id, count('a')").merge(Drawing.where(status: "ready")).group(:name).order("count('a') DESC")
   end
 
   def by_status

@@ -5,7 +5,7 @@
 <br>
 <% @projects.each do |project| %>
   <h4>
-    <%= link_to "#{project.name} (#{project.number})", project, class: "project-list-name" %>
+    <%= link_to "(#{project.number}) #{project.name}", project, class: "project-list-name" %>
   </h4>
     <p>
       <span class="project-small">

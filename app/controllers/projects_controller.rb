@@ -2,7 +2,9 @@ class ProjectsController < ApplicationController
   def index
     if params[:status]
       status = params[:status]
-      @projects = Project.joins(:drawings).select("projects.*, drawings.project_id, count('a')").merge(Drawing.where(status: status)).group(:id).order("count('a') DESC")
+      # @projects = Project.joins(:drawings).select("projects.*, drawings.project_id, count('a')").merge(Drawing.where(status: status)).group(:name).order("count('a') DESC")
+      @projects = Project.joins(:drawings).select("projects.*, drawings.project_id, count('a')").merge( Drawing.where(status: status)).group(:id, '"drawings"."project_id"').order("count('a') DESC")
+
     else
       @projects = Project.order(:number).all
     end
@@ -22,7 +24,7 @@ class ProjectsController < ApplicationController
   end
 
   def ready
-    @projects = Project.joins(:drawings).select("projects.*, drawings.project_id, count('a')").merge(Drawing.where(status: "ready")).group(:name).order("count('a') DESC")
+    @projects = Project.joins(:drawings).select("projects.*, drawings.project_id, count('a')").merge( Drawing.where(status: "ready")).group(:id, '"drawings"."project_id"').order("count('a') DESC")
   end
 
   def by_status

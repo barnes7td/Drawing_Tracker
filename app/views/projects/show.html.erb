@@ -8,7 +8,26 @@
   </span>
 </p>
 <br>
-
+<h4>Events</h4>
+<table>
+  <tr>
+    <th>Drawings</th>
+    <th>Status</th>
+    <th>Note</th>
+    <th>Date</th>
+  </tr>
+  <% @project.project_histories.each do |event| %>
+    <tr>
+      <td class="table-column"><%= event.drawings %></td>
+      <td class="table-column"><%= event.status || "-" %></td>
+      <td class="table-column notes"><%= event.notes || "-" %></td>
+      <td class="table-column "><%= event.created_at.strftime("%b %d, %Y") %></td>
+    </tr>
+  <% end %>
+</table>
+<br>
+<hr>
+<h4>Drawings</h4>
 <table>
   <tr>
     <th>Drawing No.</th>
@@ -18,7 +37,7 @@
   </tr>
   <% @project.drawings_by_number.each do |drawing| %>
     <tr>
-      <td class="table-column <%= drawing.status %>"><%= drawing.number %></td>
+      <td class="table-column <%= drawing.status %>"><%= link_to drawing.number, drawing_path(drawing.id) %></td>
       <td class="table-column <%= drawing.status %>"><%= drawing.status || "-" %></td>
       <td class="table-column notes <%= drawing.status %>"><%= drawing.notes || "-" %></td>
       <td class="table-column <%= drawing.status %>"><%= drawing.updated_at.strftime("%b %d, %Y") %></td>

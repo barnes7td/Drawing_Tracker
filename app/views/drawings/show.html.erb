@@ -1,5 +1,18 @@
-<h1><%= @drawing.name %></h1>
-
-<h3>Area</h3>
-
-<h3>Batch Number</h3>
+<h2><%= link_to "#{@drawing.project.name} (#{@drawing.project.number})", project_path(@drawing.project_id) %></h2>
+<h4><%= "Drawing # #{@drawing.number}" %></h4>
+<br>
+<h4>Events</h4>
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Note</th>
+    <th>Date</th>
+  </tr>
+  <% @drawing.drawing_histories.each do |event| %>
+    <tr>
+      <td class="table-column"><%= event.status || "-" %></td>
+      <td class="table-column notes"><%= event.notes || "-" %></td>
+      <td class="table-column "><%= event.created_at.strftime("%b %d, %Y") %></td>
+    </tr>
+  <% end %>
+</table>

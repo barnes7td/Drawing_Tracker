@@ -17,6 +17,7 @@ group :development, :test do
   gem 'guard'
   gem 'guard-rspec'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'sextant'
 end
 
 group :assets do

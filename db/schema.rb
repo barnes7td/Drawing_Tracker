@@ -11,10 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131104194508) do
+ActiveRecord::Schema.define(:version => 20131108162803) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "drawing_histories", :force => true do |t|
+    t.integer  "drawing_id"
+    t.string   "status"
+    t.string   "notes"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -40,6 +48,17 @@ ActiveRecord::Schema.define(:version => 20131104194508) do
   end
 
   add_index "erection_drawings", ["project_id"], :name => "index_erection_drawings_on_project_id"
+
+  create_table "project_histories", :force => true do |t|
+    t.string   "drawings"
+    t.string   "status"
+    t.string   "notes"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "project_histories", ["project_id"], :name => "index_project_histories_on_project_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"

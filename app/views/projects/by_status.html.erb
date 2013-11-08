@@ -7,14 +7,16 @@
 
 <table>
   <tr>
-    <th class="table-column">Drawing No.</th>
-    <th class="table-column">Status</th>
-    <th class="table-column">Last Updated</th>
+    <th>Drawing No.</th>
+    <th>Status</th>
+    <th>Note</th>
+    <th>Last Updated</th>
   </tr>
   <% @drawings.each do |drawing| %>
     <tr>
-      <td class="table-column <%= drawing.status %>"><%= drawing.number %></td>
+      <td class="table-column <%= drawing.status %>"><%= link_to drawing.number, drawing_path(drawing.id) %></td>
       <td class="table-column <%= drawing.status %>"><%= drawing.status || "-" %></td>
+      <td class="table-column notes <%= drawing.status %>"><%= drawing.notes || "-" %></td>
       <td class="table-column <%= drawing.status %>"><%= drawing.updated_at.strftime("%b %d, %Y") %></td>
       <td class="table-column-delete"><%= link_to "Delete", drawing_path(drawing.id), method: "delete", id: "drawing-delete-#{drawing.id}" %></td>
     </tr>
@@ -27,5 +29,7 @@
     <%= text_field_tag :drawings %>
     <%= label_tag :status, "Status" %>
     <%= text_field_tag :status %>
+    <%= label_tag :notes, "Note" %>
+    <%= text_field_tag :notes %>
     <%= submit_tag "Update" %>
 <% end %>

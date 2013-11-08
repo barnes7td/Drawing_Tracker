@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   attr_accessible :name, :number, :status
 
   has_many :drawings
+  has_many :project_histories
 
   def drawings_by_number
     Drawing.where(project_id: id).order(:number).all.

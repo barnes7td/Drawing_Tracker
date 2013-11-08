@@ -7,18 +7,12 @@ class DrawingsController < ApplicationController
   def create
     project = Project.find(params[:project_id])
 
+    project.project_histories.add_event(params)
+
     drawing_list = Drawingshorthand.decrypt(params[:drawings])
 
     drawing_list.each do |drawing|
-      drawing_query = Drawing.where(project_id: project.id, number: drawing).all
-      if drawing_query.empty?
-        project.drawings.create(number: drawing, status: params[:status], notes: params[:notes])
-      else
-        drawing = drawing_query[0]
-        drawing.status = params[:status]
-        drawing.notes = params[:notes] unless params[:notes].empty?
-        drawing.save
-      end
+      project.drawings.add_or_update(params, drawing)
     end
     redirect_to project_path(params[:project_id])
   end

@@ -28,7 +28,7 @@ class Drawing < ActiveRecord::Base
     drawing_query = where(project_id: params[:project_id], number: drawing).all
     if drawing_query.empty?
       footage = params[:footage] || 0
-      drawing = create(number: drawing, status: params[:status], notes: params[:notes], approval_status: params[:approval_status])
+      drawing = create(number: drawing, status: params[:status], notes: params[:notes], approval_status: params[:approval_status] footage: footage)
       # drawing.drawing_histories.create(status: params[:status], notes: params[:notes])
     else
       drawing = drawing_query[0]

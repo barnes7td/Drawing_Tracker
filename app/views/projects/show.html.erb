@@ -2,57 +2,39 @@
   <%= "#{@project.name}  (#{@project.number})" %>
   <span><%= link_to "Project by status", "/projects/#{@project.id}/by_status" %></span>
 </h2>
-<p>
-  <span id="show-stats">
-    <%= "#{@project.percent_in_shop}% Complete of #{@project.number_of_drawings} Drawings  - #{@project.no_of_drawings_ready} Drawings Ready - #{@project.no_of_drawings_question}  Drawings in Question" %>
-  </span>
-</p>
+<%= render partial: "stats", locals: {project: @project}  %>
+<h5><%= "Estimated Footage: #{@project.footage || 0} ft." %></h5>
 <br>
+<h5><%= "Detailed Footage: #{@project.detailed_footage || 0} ft." %></h5>
+<hr>
 <h4>Events</h4>
+<br>
+<% if @project.project_histories.empty? %>
+  <p>No project events</p>
+<% else %>
 <table>
   <tr>
     <th>Drawings</th>
-    <th>Status</th>
-    <th>Note</th>
+    <th>Status Change</th>
+    <th>Approval Change</th>
+    <th>Note Change</th>
+    <th>Footage Change</th>
     <th>Date</th>
   </tr>
   <% @project.project_histories.each do |event| %>
     <tr>
       <td class="table-column"><%= event.drawings %></td>
-      <td class="table-column"><%= event.status || "-" %></td>
-      <td class="table-column notes"><%= event.notes || "-" %></td>
+      <td class="table-column"><%= event.status %></td>
+      <td class="table-column"><%= event.approval_status %></td>
+      <td class="table-column notes"><%= event.notes %></td>
+      <td class="table-column"><%= "#{ event.footage || 0 } ft."%></td>
       <td class="table-column "><%= event.created_at.strftime("%b %d, %Y") %></td>
     </tr>
   <% end %>
 </table>
+<% end %>
 <br>
 <hr>
-<h4>Drawings</h4>
-<table>
-  <tr>
-    <th>Drawing No.</th>
-    <th>Status</th>
-    <th>Note</th>
-    <th>Last Updated</th>
-  </tr>
-  <% @project.drawings_by_number.each do |drawing| %>
-    <tr>
-      <td class="table-column <%= drawing.status %>"><%= link_to drawing.number, drawing_path(drawing.id) %></td>
-      <td class="table-column <%= drawing.status %>"><%= drawing.status || "-" %></td>
-      <td class="table-column notes <%= drawing.status %>"><%= drawing.notes || "-" %></td>
-      <td class="table-column <%= drawing.status %>"><%= drawing.updated_at.strftime("%b %d, %Y") %></td>
-      <td class="table-column-delete"><%= link_to "Delete", drawing_path(drawing.id), method: "delete", id: "drawing-delete-#{drawing.id}" %></td>
-    </tr>
-  <% end %>
-</table>
+<%= render partial: 'drawings_list', locals: { project: @project, order: :drawings_by_number }%>
 <br>
-<%= form_tag drawings_path do %>
-    <%= hidden_field_tag :project_id, @project.id %>
-    <%= label_tag :drawings, "Drawings" %>
-    <%= text_field_tag :drawings %>
-    <%= label_tag :status, "Status" %>
-    <%= text_field_tag :status %>
-    <%= label_tag :notes, "Note" %>
-    <%= text_field_tag :notes %>
-    <%= submit_tag "Update" %>
-<% end %>
+<%= render partial: 'drawings/form', locals: { project: @project }%>

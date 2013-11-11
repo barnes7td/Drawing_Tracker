@@ -1,0 +1,14 @@
+<%= form_tag drawings_path do %>
+    <%= hidden_field_tag :project_id, @project.id %>
+    <%= label_tag :drawings, "Drawings" %>
+    <%= text_field_tag :drawings %>
+    <%= label_tag :status, "Status" %>
+    <%= select_tag(:status, options_for_select(Drawing::ENGINEERING_STAGE), include_blank: true) %>
+    <%= label_tag :approval_status, "Approval Status" %>
+    <%= select_tag(:approval_status, options_for_select(Drawing::APPROVAL_STATUSES), include_blank: true) %>
+    <%= label_tag :notes, "Note" %>
+    <%= text_field_tag :notes %>
+    <%= label_tag :footage, "Footage" %>
+    <%= text_field_tag :footage %>
+    <%= submit_tag "Update" %>
+<% end %>

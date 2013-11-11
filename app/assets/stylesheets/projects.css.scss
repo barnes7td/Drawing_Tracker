@@ -15,19 +15,12 @@ h4 {
 }
 
 
-.table-column { 
-  width: 140px;
-  height: 30px;
-  text-align: center;
-  font-size: 16px;
-}
-
 .notes {
   width: 300px;
 }
 
 th {
-  width: 140px;
+  width: 160px;
   height: 30px;
   text-align: center;
   font-family: Rochester;
@@ -48,14 +41,30 @@ a {
 
 .question {
   color: red;
+  a {
+    color: red;
+  }
+}
+
+.approval {
+  color: blue;
+  a {
+    color: blue;
+  }
 }
 
 .ready {
   color: green;
+  a {
+    color: green;
+  }
 }
 
 .finished {
   color: #C8C8C8;
+  a {
+    color: #C8C8C8;
+  }
 }
 
 h2 {

@@ -1,0 +1,23 @@
+<h4>Drawings</h4>
+<br>
+<table>
+  <tr>
+    <th>Drawing No.</th>
+    <th>Status</th>
+    <th>Approval</th>
+    <th>Note</th>
+    <th>Footage</th>
+    <th>Last Updated</th>
+  </tr>
+  <% project.send(order).each do |drawing| %>
+    <tr>
+      <td class="table-column <%= drawing.color_status %>"><%= link_to drawing.number, drawing_path(drawing.id) %></td>
+      <td class="table-column <%= drawing.color_status %>"><%= drawing.status %></td>
+      <td class="table-column <%= drawing.color_status %>"><%= drawing.approval_status %></td>
+      <td class="table-column notes <%= drawing.color_status %>"><%= drawing.notes %></td>
+      <td class="table-column <%= drawing.color_status %>"><%= "#{drawing.footage || 0} ft." %></td>
+      <td class="table-column <%= drawing.color_status %>"><%= drawing.updated_at.strftime("%b %d, %Y") %></td>
+      <td class="table-column-delete"><%= link_to "Delete", drawing_path(drawing.id), method: "delete", id: "drawing-delete-#{drawing.id}" %></td>
+    </tr>
+  <% end %>
+</table>

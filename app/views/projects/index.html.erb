@@ -7,9 +7,5 @@
   <h4>
     <%= link_to "(#{project.number}) #{project.name}", project, class: "project-list-name" %>
   </h4>
-    <p>
-      <span class="project-small">
-        <%= "#{project.percent_in_shop}% Complete of #{project.number_of_drawings} Drawings - #{project.no_of_drawings_ready} Drawings Ready - #{project.no_of_drawings_question}  Drawings in Question" %>
-      </span>
-    </p>
+  <%= render partial: "stats", locals: {project: project}  %>
 <% end %>

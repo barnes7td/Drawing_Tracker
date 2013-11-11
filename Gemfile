@@ -30,6 +30,7 @@ end
 
 gem 'jquery-rails'
 gem 'squeel'
+gem 'paper_trail', '>= 3.0.0.rc1'
 
 
 if RUBY_PLATFORM =~ /darwin/

@@ -2,6 +2,8 @@ class DrawingsController < ApplicationController
 
   def show
     @drawing = Drawing.find(params[:id])
+    puts "==================="
+    p @drawing.versions
   end
 
   def create

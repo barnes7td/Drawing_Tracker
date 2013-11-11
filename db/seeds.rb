@@ -1,18 +1,28 @@
-require 'faker'
 
 def rn
   rand(9)
 end
 
-STATUS = ["detailing", "ready", "question", "releasing", "finished"]
+cities = %w(Croton Pittsburgh Plainfield Dallas Tampa Jamaica )
 
-10.times do
-  project = Project.create( name: Faker::Address.city,
-                  number: "213-#{rn}#{rn}-#{rn}#{rn}")
-  (1..20).each do |n|
-    project.drawings.create(number: n.to_s, status: STATUS[rand(5)])
+STATUS = Drawing::ENGINEERING_STAGE
+APPROVAL = Drawing::APPROVAL_STATUSES
+
+cities.length.times do
+  footage = rand(100)*10
+  project = Project.create( name: cities.pop,
+                  number: "213-#{rn}#{rn}-#{rn}#{rn}",
+                  footage: footage)
+  dr_no = rand(20 + 5)
+  (1..dr_no).each do |n|
+    project.drawings.create(number: n.to_s,
+                            status: STATUS[rand(STATUS.length)],
+                            approval_status: APPROVAL[rand(APPROVAL.length)],
+                            notes: "Detailed Job",
+                            footage: footage/dr_no)
   end
 end
+puts "(10) Projects created"
 
 
 # (1..20).each do |n|

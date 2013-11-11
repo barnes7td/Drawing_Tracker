@@ -19,8 +19,13 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.create params[:project]
-    redirect_to projects_path
+    @project = Project.new params[:project]
+    if @project.save
+      redirect_to projects_path
+    else
+      flash[:error] = "Footage is a required field"
+      redirect_to new_project_path
+    end
   end
 
   def ready

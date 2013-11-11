@@ -9,6 +9,9 @@
 <body>
 <br>
   <div class="container">
+    <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%>
     <nav>
       <ul>
         <li><%= link_to "Projects", root_path %></li>

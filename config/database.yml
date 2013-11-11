@@ -3,16 +3,16 @@ development:
   encoding: unicode
   database: tracker_dev
   pool: 5
-  # username: bloc
-  # password: password
+  username: bloc
+  password: password
 
 test:
   adapter: postgresql
   encoding: unicode
   database: tracker_test
   pool: 5
-  # username: bloc
-  # password: password
+  username: bloc
+  password: password
 
 production:
   adapter: sqlite3

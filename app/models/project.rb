@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
   has_many :drawings
   has_many :project_histories
 
+  validates :footage, presence: true
+
   def drawings_by_number
     Drawing.where(project_id: id).order(:number).all.
       sort!{|x, y| x.number.to_i <=> y.number.to_i}
@@ -27,8 +29,10 @@ class Project < ActiveRecord::Base
   end
 
   def percent_in_shop
+    #TODO Lots of fixes here due to no validations. Time for validations
+
     # percent = (Drawing.where(status: "finished", project_id: id).all.length.to_f / Drawing.where(project_id: id).all.length * 100.0).round(2)
-    percent = (Drawing.where(status: "Released", project_id: id).map{|d| d.footage || 0 }.inject(:+).to_f/Project.find(id).footage * 100.0).round(2)
+    percent = (percent_released / ( Project.find(id).footage || 0 ) * 100.0).round(2)
     if percent.nan?
       0.0
     else
@@ -56,6 +60,10 @@ class Project < ActiveRecord::Base
     else
       "(#{number})"
     end
+  end
+
+  def percent_released
+    Drawing.where(status: "Released", project_id: id).map{|d| d.footage || 0 }.inject(:+).to_f || 0
   end
 
 end

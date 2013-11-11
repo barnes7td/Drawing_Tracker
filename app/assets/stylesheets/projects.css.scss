@@ -27,6 +27,10 @@ th {
   font-size: 20px;
 }
 
+td {
+  @extend th
+}
+
 .table-column-delete {
   width: 140px;
   text-align: center;

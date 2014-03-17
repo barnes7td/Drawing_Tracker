@@ -44,5 +44,4 @@ class Drawing < ActiveRecord::Base
   def color_status
     self.class.engineering_status[status]
   end
-
 end
